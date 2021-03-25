@@ -19,21 +19,29 @@ spec:
       - image: wp_img
         name: wordpress
         imagePullPolicy: Never
-        # env:
-        # - name: WORDPRESS_DB_HOST
-        #   value: wordpress-mysql
-        # - name: WORDPRESS_DB_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: mysql-pass
-        #       key: password
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql-svc
+        - name: WORDPRESS_DB_PASSWORD
+          value: pass_db
         ports:
         - containerPort: 5050
           name: wordpress
         volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /www/
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
       volumes:
-      - name: wordpress-persistent-storage
+      - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: wp-vc
+          claimName: mysql-vc
+      #   - name: wordpress-persistent-storage
+      #     mountPath: /usr/share/webapps
+      # volumes:
+      # - name: wordpress-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: wp-vc
+
+                # valueFrom:
+          #   secretKeyRef:
+          #     name: mysql-pass
+          #     key: password
