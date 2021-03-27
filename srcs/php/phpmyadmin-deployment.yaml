@@ -5,6 +5,7 @@ metadata:
   labels:
     app: phpmyadmin
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: phpmyadmin
@@ -19,23 +20,6 @@ spec:
       - image: php_img
         name: phpmyadmin
         imagePullPolicy: Never
-        env:
-        - name: PMA_HOST
-          value: mysql
-        - name: PMA_PORT
-          value: "3306"
-        - name: MYSQL_ROOT_PASSWORD
-          value: pass_db
         ports:
         - containerPort: 5000
-      #   - name: phpmyadmin-persistent-storage
-      #     mountPath: /usr/share/webapps
-      # volumes:
-      # - name: phpmyadmin-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: wp-vc
 
-                # valueFrom:
-          #   secretKeyRef:
-          #     name: mysql-pass
-          #     key: password

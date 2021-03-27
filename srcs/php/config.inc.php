@@ -28,8 +28,9 @@ $i = 0;
 $i++;
 /* Authentication type */
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
+
 /* Server parameters */
-$cfg['Servers'][$i]['host'] = '127.0.0.1';
+$cfg['Servers'][$i]['host'] = 'mysql-svc';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
 
@@ -154,4 +155,11 @@ $cfg['SaveDir'] = '';
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
 
+ /**
+  * for -- The $cfg['TempDir'] (./tmp/) is not accessible. phpMyAdmin is not able to cache templates and will be slow because of this.
+  */
+$cfg['TempDir'] = '/tmp';
+
 $cfg['ThemeDefault'] = 'metro';
+
+// $cfg['PmaAbsoluteUri'] = '/phpmyadmin';

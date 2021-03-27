@@ -7,9 +7,7 @@ openssl
 
 RUN mkdir -p /run/nginx
 
-COPY localhost.conf /etc/nginx/conf.d/default.conf
-
-# RUN rm -f /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # get SSL certificate
 RUN openssl req -x509 -days 365 -out /etc/ssl/certs/localhost.crt -keyout /etc/ssl/private/localhost.key \

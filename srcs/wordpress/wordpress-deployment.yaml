@@ -5,6 +5,7 @@ metadata:
   labels:
     app: wordpress
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress
@@ -23,7 +24,7 @@ spec:
         - name: WORDPRESS_DB_HOST
           value: mysql-svc
         - name: WORDPRESS_DB_PASSWORD
-          value: pass_db
+          value: root
         ports:
         - containerPort: 5050
           name: wordpress
@@ -34,12 +35,6 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-vc
-      #   - name: wordpress-persistent-storage
-      #     mountPath: /usr/share/webapps
-      # volumes:
-      # - name: wordpress-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: wp-vc
 
                 # valueFrom:
           #   secretKeyRef:
