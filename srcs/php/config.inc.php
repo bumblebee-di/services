@@ -162,4 +162,4 @@ $cfg['TempDir'] = '/tmp';
 
 $cfg['ThemeDefault'] = 'metro';
 
-// $cfg['PmaAbsoluteUri'] = '/phpmyadmin';
+// $cfg['PmaAbsoluteUri'] = 'http://192.168.99.100/phpmyadmin/';

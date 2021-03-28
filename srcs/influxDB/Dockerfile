@@ -1,8 +1,7 @@
 FROM alpine:3.12.4
 
 # install
-RUN apk update && apk upgrade
-RUN apk add influxdb
+RUN apk update && apk upgrade && apk add influxdb
 
 # COPY /supervisor.conf /etc/supervisord.conf
 
