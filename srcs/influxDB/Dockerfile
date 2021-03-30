@@ -5,6 +5,7 @@ RUN apk update && apk upgrade && apk add influxdb
 
 # COPY /supervisor.conf /etc/supervisord.conf
 
+COPY ./influxdb.conf /etc/influxdb.conf
 COPY ./influxdb-entrypoint.sh /tmp/influxdb-entrypoint.sh
 RUN chmod +x /tmp/influxdb-entrypoint.sh
 

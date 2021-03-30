@@ -7,7 +7,7 @@ apk add nginx openssl
 COPY ./nginx-entrypoint.sh /tmp/nginx-entrypoint.sh
 RUN chmod +x tmp/nginx-entrypoint.sh && mkdir -p /run/nginx
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # get SSL certificate
 RUN openssl req -x509 -days 365 -out /etc/ssl/certs/localhost.crt -keyout /etc/ssl/private/localhost.key \

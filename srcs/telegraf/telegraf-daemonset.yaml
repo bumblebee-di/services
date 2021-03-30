@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: telegraf
+  labels:
+    app: telegraf
+spec:
+  selector:
+    matchLabels:
+      name: telegraf
+  template:
+    metadata:
+      labels:
+        name: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: telegraf_img
+        imagePullPolicy: Never
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: "HOST_PROC"
+          value: "/rootfs/proc"
+        - name: "HOST_SYS"
+          value: "/rootfs/sys"
+        - name: INFLUXDB_USER
+          value: admin
+        - name: INFLUXDB_USER_PASSWORD
+          value: admin
+        - name: INFLUXDB_HOST
+          value: 192.168.99.100
+        - name: INFLUXDB_DB
+          value: influxdb
+        volumeMounts:
+        - name: sys
+          mountPath: /rootfs/sys
+          readOnly: true
+        - name: proc
+          mountPath: /rootfs/proc
+          readOnly: true
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        - name: utmp
+          mountPath: /var/run/utmp
+          readOnly: true
+        - name: config
+          mountPath: /etc/
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+      - name: proc
+        hostPath:
+          path: /proc
+      - name: utmp
+        hostPath:
+          path: /var/run/utmp
+      - name: config
+        configMap:
+          name: telegraf

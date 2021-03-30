@@ -22,6 +22,9 @@ spec:
      imagePullPolicy: Never
      ports:
      - containerPort: 8086
+    #  envFrom:
+    #    - secretRef:
+    #        name: influxdb-secrets
      volumeMounts:
      - name: influxdb-persistent-storage
        mountPath: /var/lib/influxdb

@@ -24,18 +24,18 @@ metadata:
   labels:
     app: nginx
 spec:
- selector:
-  matchLabels:
-   app: nginx
- template:
-  metadata:
-   labels:
-    app: nginx
-  spec:
-   containers:
-   - name: nginx
-     image: nginx_img
-     imagePullPolicy: Never
-     ports:
-     - containerPort: 80
-     - containerPort: 443
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx_img
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+            - containerPort: 443
