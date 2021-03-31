@@ -1,4 +1,4 @@
-FROM alpine:3.12.4
+FROM alpine:3.12.5
 
 # install
 RUN apk update && apk upgrade
@@ -6,22 +6,19 @@ RUN apk add vsftpd \
 openssl supervisor
 
 # get SSL certificate
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.crt \
--subj '/CN=192.168.99.100'
-
-# RUN openssl genrsa -des3 -out FTP.key && cp FTP.key FTP.key.orig
-# RUN openssl rsa -in FTP.key.orig -out ftp.key
-# RUN openssl x509 -req -days 365 -in certificate.csr -signkey ftp.key -outmycertificate.crt
-# RUN cp ftp.key /etc/pki/tls/certs/ && cp mycertificate.crt /etc/pki/tls/certs
+COPY ftps-entrypoint.sh tmp/ftps-entrypoint.sh
+RUN chmod +x tmp/ftps-entrypoint.sh && openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout \
+/etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem \
+-subj '/CN=ftps'
 
 COPY /supervisor.conf /etc/supervisord.conf
-COPY vsftpd.conf /etc/vsftpd.conf
-COPY vsftpd.user_list /etc/vsftpd.user_list
+COPY vsftpd.conf /etc/vsftpd/vsftpd.conf.backup
+COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 
-COPY ftps-entrypoint.sh tmp/ftps-entrypoint.sh
+RUN mkdir -p /var/ftps/user_ftps && chmod 755 /var/ftps/user_ftps && \
+adduser -h /var/ftps/user_ftps -D user_ftps && (echo user_ftps:pass_ftps | chpasswd) && \
+chown user_ftps:user_ftps /var/ftps/user_ftps/
 
-RUN chmod +x tmp/ftps-entrypoint.sh
-
-EXPOSE 21
+EXPOSE 21 21210
 
 ENTRYPOINT ["tmp/ftps-entrypoint.sh"]

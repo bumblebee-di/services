@@ -9,10 +9,14 @@ spec:
     app: ftps
   type: LoadBalancer
   ports:
-    - protocol: TCP
-      name: http
+    - name: ftps
       port: 21
       targetPort: 21
+      protocol: TCP
+    - name: ftps-passive
+      port: 21210
+      targetPort: 21210
+      protocol: TCP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,3 +39,4 @@ spec:
      imagePullPolicy: Never
      ports:
      - containerPort: 21
+     - containerPort: 21210

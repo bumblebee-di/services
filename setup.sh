@@ -1,7 +1,7 @@
 
 minikube start --driver=virtualbox
-kubectl apply -f srcs/mysql/mysql-pvc.yaml
-kubectl apply -f srcs/influxdb/influxdb-pvc.yaml
+# kubectl apply -f srcs/mysql/mysql-pvc.yaml
+# kubectl apply -f srcs/influxdb/influxdb-pvc.yaml
 eval $(minikube docker-env)
 docker build -t nginx_img srcs/nginx/
 minikube addons enable metallb

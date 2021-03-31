@@ -11,4 +11,5 @@ spec:
   ports:
     - protocol: TCP
       port: 3000
-      targetPort: http-grafana
+      targetPort: 3000
+      name: grafana
