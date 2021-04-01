@@ -1,15 +1,12 @@
 #!/bin/sh
 
-mysql_install_db --user=root --datadir=/var/lib/mysql
-
-/usr/bin/mysqld --user=root --datadir=/var/lib/mysql --bootstrap <<EOF
-FLUSH PRIVILEGES;
-CREATE DATABASE wordpress;
-CREATE USER 'user_db'@'%' IDENTIFIED BY 'pass_db';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'user_db'@'%' IDENTIFIED BY 'pass_db';
-FLUSH PRIVILEGES;
-EOF
-
+./etc/init.d/mariadb setup
+./etc/init.d/mariadb start
+mysql -u root -e "CREATE DATABASE wordpress;"
+mysql -u root -e "CREATE USER 'user_db'@'%' IDENTIFIED BY 'pass_db';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'user_db'@'%' IDENTIFIED BY 'pass_db';"
+mysql -u root -e "FLUSH PRIVILEGES;"
+mysql -u root -e "USE wordpress;"
+mysql -u root wordpress < wordpress.sql
+./etc/init.d/mariadb stop
 /usr/bin/mysqld --user=root --datadir=/var/lib/mysql
-#  --skip-grant-tables
-# while true; do ping 8.8.8.8; done

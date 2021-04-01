@@ -23,6 +23,11 @@ spec:
      ports:
      - containerPort: 3000
        name: grafana
+     env:
+       - name: GF_SECURITY_ADMIN_USER
+         value: user_grafana
+       - name: GF_SECURITY_ADMIN_PASSWORD
+         value: pass_grafana
      volumeMounts:
      - name: influxdb-persistent-storage
        mountPath: /var/lib/influxdb

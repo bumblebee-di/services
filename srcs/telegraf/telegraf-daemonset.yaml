@@ -26,13 +26,13 @@ spec:
           value: "/rootfs/proc"
         - name: "HOST_SYS"
           value: "/rootfs/sys"
-        - name: INFLUXDB_USER
+        - name: INFLUXDB_USER #user
           value: admin
-        - name: INFLUXDB_USER_PASSWORD
+        - name: INFLUXDB_USER_PASSWORD #<password>
           value: admin
-        - name: INFLUXDB_HOST
+        - name: INFLUXDB_HOST #influxdb
           value: 192.168.99.100
-        - name: INFLUXDB_DB
+        - name: INFLUXDB_DB #monitoring
           value: influxdb
         volumeMounts:
         - name: sys
