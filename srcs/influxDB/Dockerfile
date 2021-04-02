@@ -6,11 +6,8 @@ telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/community --no-cac
 
 COPY /supervisor.conf /etc/supervisord.conf
 COPY ./influxdb.conf /etc/influxdb.conf
-COPY ./influxdb-entrypoint.sh /tmp/influxdb-entrypoint.sh
-RUN chmod +x /tmp/influxdb-entrypoint.sh
 
 EXPOSE 8086
 
-# ENTRYPOINT ["/tmp/influxdb-entrypoint.sh"]
 ENTRYPOINT ["/usr/bin/supervisord", "-n"]
 
