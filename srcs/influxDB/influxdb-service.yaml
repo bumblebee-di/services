@@ -11,3 +11,4 @@ spec:
   ports:
     - port: 8086
       protocol: TCP
+      targetPort: 8086

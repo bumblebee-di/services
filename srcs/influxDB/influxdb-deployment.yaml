@@ -23,17 +23,18 @@ spec:
      ports:
      - containerPort: 8086
      env:
-      - name: INFLUXDB_DATABASE
+      - name: INFLUXDB_DB
         value: influxdb
-      - name: INFLUXDB_USERNAME
+      - name: INFLUXDB_USER
         value: user_influxdb
-      - name: INFLUXDB_PASSWORD
+      - name: INFLUXDB_USER_PASSWORD
+        value: pass_influxdb
+      - name: INFLUXDB_ADMIN_USER
+        value: user_influxdb
+      - name: INFLUXDB_ADMIN_PASSWORD
         value: pass_influxdb
       - name: INFLUXDB_HOST
         value: influxdb
-    #  envFrom:
-    #    - secretRef:
-    #        name: influxdb-secrets
      volumeMounts:
      - name: influxdb-persistent-storage
        mountPath: /var/lib/influxdb

@@ -21,4 +21,5 @@ chown user_ftps:user_ftps /var/ftps/user_ftps/
 
 EXPOSE 21 21210
 
-ENTRYPOINT ["tmp/ftps-entrypoint.sh"]
+# ENTRYPOINT ["tmp/ftps-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/supervisord", "-n"]

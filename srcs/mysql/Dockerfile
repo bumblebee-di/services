@@ -2,9 +2,10 @@ FROM alpine:3.12.4
 
 # install
 RUN apk update && apk upgrade && \
- apk add mysql mysql-client openrc
+ apk add mysql mysql-client openrc supervisor
 
 COPY ./mysql-entrypoint.sh /tmp/mysql-entrypoint.sh
+COPY /supervisor.conf /etc/supervisord.conf
 
 RUN chmod +x tmp/mysql-entrypoint.sh && \
  mkdir -p /run/mysqld && mkdir -p /var/lib/mysql \

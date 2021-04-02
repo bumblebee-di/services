@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf-deployment
+spec:
+  selector:
+    matchLabels:
+      app: telegraf
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      containers:
+        - image: telegraf_img
+          name: telegraf
+          imagePullPolicy: Never
+          volumeMounts:
+            - mountPath: /etc/telegraf.conf
+              name: telegraf-config
+              subPath: telegraf.conf
+              readOnly: true
+            - mountPath: /var/run/docker.sock
+              name: docker-sock-volume
+          env:
+          - name: INFLUXDB_DB
+            value: telegraf
+          - name: INFLUXDB_USER
+            value: user_influxdb
+          - name: INFLUXDB_USER_PASSWORD
+            value: "pass_influxdb"
+          - name: INFLUXDB_URL
+            value: "http://influxdb-svc:8086"
+      volumes:
+        - name: telegraf-config
+          configMap:
+            name: telegraf-config
+        - name: docker-sock-volume
+          hostPath:
+            path: /var/run/docker.sock
