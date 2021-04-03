@@ -9,4 +9,4 @@ mysql -u root -e "FLUSH PRIVILEGES;"
 mysql -u root -e "USE wordpress;"
 mysql -u root wordpress < wordpress.sql
 ./etc/init.d/mariadb stop
-/usr/bin/supervisord -c /etc/supervisord.conf
+/usr/bin/mysqld --user=root --datadir=/var/lib/mysql

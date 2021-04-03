@@ -35,8 +35,3 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-vc
-
-                # valueFrom:
-          #   secretKeyRef:
-          #     name: mysql-pass
-          #     key: password

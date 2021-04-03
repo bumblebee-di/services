@@ -7,8 +7,8 @@ php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-my
 
 RUN mkdir -p /run/nginx && mkdir -p /run/php &&  mkdir -p /www/phpmyadmin
 
-COPY /supervisor.conf /etc/supervisord.conf
-COPY /php.conf /etc/nginx/conf.d/default.conf
+COPY ./supervisor.conf /etc/supervisord.conf
+COPY ./php.conf /etc/nginx/conf.d/default.conf
 COPY ./config.inc.php /www/phpmyadmin/config.inc.php
 
 WORKDIR /www/
@@ -20,4 +20,3 @@ WORKDIR /
 EXPOSE 5000
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n"]
-# /usr/bin/supervisord -c /etc/supervisord.conf

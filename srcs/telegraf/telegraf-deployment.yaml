@@ -24,6 +24,15 @@ spec:
               readOnly: true
             - mountPath: /var/run/docker.sock
               name: docker-sock-volume
+            - name: utmp
+              mountPath: /var/run/utmp
+              readOnly: true
+            - name: sys
+              mountPath: /rootfs/sys
+              readOnly: true
+            - name: proc
+              mountPath: /rootfs/proc
+              readOnly: true
           env:
           - name: INFLUXDB_DB
             value: influxdb
@@ -40,3 +49,12 @@ spec:
         - name: docker-sock-volume
           hostPath:
             path: /var/run/docker.sock
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: utmp
+          hostPath:
+            path: /var/run/utmp

@@ -1,13 +1,10 @@
-FROM alpine:3.12.4
+FROM alpine:3.12.5
 
 # install
-RUN apk update && apk upgrade && apk add influxdb supervisor \ 
-telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/community --no-cache --allow-untrusted
+RUN apk update && apk upgrade && apk add influxdb
 
-COPY /supervisor.conf /etc/supervisord.conf
 COPY ./influxdb.conf /etc/influxdb.conf
 
 EXPOSE 8086
 
-ENTRYPOINT ["/usr/bin/supervisord", "-n"]
-
+ENTRYPOINT ["influxd"]

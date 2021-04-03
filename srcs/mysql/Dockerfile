@@ -1,15 +1,14 @@
-FROM alpine:3.12.4
+FROM alpine:3.12.5
 
 # install
 RUN apk update && apk upgrade && \
- apk add mysql mysql-client openrc supervisor
+ apk add mysql mysql-client openrc
 
 COPY ./mysql-entrypoint.sh /tmp/mysql-entrypoint.sh
-COPY /supervisor.conf /etc/supervisord.conf
 
 RUN chmod +x tmp/mysql-entrypoint.sh && \
- mkdir -p /run/mysqld && mkdir -p /var/lib/mysql \
- && chmod 755 /run/mysqld
+mkdir -p /run/mysqld && mkdir -p /var/lib/mysql \
+&& chmod 755 /run/mysqld
 COPY ./wordpress.sql /wordpress.sql
 RUN openrc && touch /run/openrc/softlevel && chmod 755 /wordpress.sql
 
