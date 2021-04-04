@@ -18,4 +18,3 @@ WORKDIR /
 EXPOSE 5050
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n"]
-

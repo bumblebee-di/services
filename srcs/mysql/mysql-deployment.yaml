@@ -36,8 +36,3 @@ spec:
    - name: usermanagement-dbcreation-script
      configMap:
        name: usermanagement-dbcreation-script
-
-             #  valueFrom:
-      #   secretKeyRef:
-      #     name: mysql-pass
-      #     key: password

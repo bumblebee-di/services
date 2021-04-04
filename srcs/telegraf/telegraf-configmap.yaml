@@ -6,7 +6,6 @@ metadata:
 data:
   telegraf.conf: |+
     [global_tags]
-      user = "$INFLUXDB_USER"
     [agent]
       interval = "10s"
       round_interval = true
@@ -17,6 +16,7 @@ data:
       flush_jitter = "0s"
       precision = ""
       hostname = "$HOSTNAME"
+      # hostname = ""
       omit_hostname = false
     [[outputs.influxdb]]
       urls = ["http://influxdb-svc:8086/"]
