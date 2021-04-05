@@ -5,7 +5,7 @@ RUN apk update && apk upgrade && \
 apk add nginx openssl
 
 COPY ./nginx-entrypoint.sh /tmp/nginx-entrypoint.sh
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # get SSL certificate
 RUN chmod +x tmp/nginx-entrypoint.sh && mkdir -p /run/nginx && \
